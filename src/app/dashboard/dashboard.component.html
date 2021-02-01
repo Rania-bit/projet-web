@@ -1,0 +1,39 @@
+ <div class="card-container">
+      <mat-card style="background-color:#f39c4a;">
+            <img src="../../assets/images/dashbord-sessions.png" width="100%" height="100%">
+            <div style="text-align: center;     ">
+                  <p>
+                  {{nbrSession}}5
+                  </p>
+                  <p>Sessions</p>
+            </div>
+        </mat-card>
+        <mat-card style="background-color:#4af390;">
+            <img src="../../assets/images/dashbord-participant.png" width="100%" height="100%">
+            <div style="text-align: center;     ">
+                  <p>
+                  {{nbrParticipant}}50
+                  </p>
+                  <p>Participants</p>
+            </div>
+        </mat-card>
+        <mat-card style="background-color:#a14af3;">
+            <img src="../../assets/images/formateur.png" width="100%" height="100%">
+            <div style="text-align: center;     ">
+                  <p>
+                  {{nbrFormateurs}}2
+                  </p>
+                  <p>Formateurs</p>
+            </div>
+        </mat-card>
+</div>
+
+<div class="table-container">
+      <div class="track-table">
+                  <app-track-table></app-track-table>
+      </div>
+
+      <div class="formateur-container">
+            <app-formateur-table></app-formateur-table>
+      </div>
+</div>

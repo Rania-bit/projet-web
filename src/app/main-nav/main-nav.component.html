@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <img src="../../assets/images/admin.png" alt="espace admin" style="width: 40px; height: 40px; 
+      margin-right: 10px ; 
+      position: left;">
+      <a style="font-size: 25px;">Espace Admin</a>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a class="item" mat-list-item routerLink="/rechercher_session">
+        <img src="../../assets/images/Chercher.png" style="width:50px; height:50px; margin:10px">
+        <p class="chercher">Rechercher session</p></a>
+      <a class="item" mat-list-item routerLink="/">
+        <img src="../../assets/images/Dashboard.png" style="width:50px; height:50px; margin:10px">
+        Dashboard</a>
+      <a class="item" mat-list-item routerLink="/sessions">
+        <img src="../../assets/images/dashbord-sessions.png" style="width:50px; height:50px; margin:10px">
+        Sessions</a>
+      <a class="item" mat-list-item routerLink="/formateurs">
+        <img src="../../assets/images/formateur.png" style="width:50px; height:50px; margin:10px">
+        Foramateurs</a>
+      <a class="item" mat-list-item routerLink="/participants">
+        <img src="../../assets/images/dashbord-participant.png" style="width:50px; height:50px; margin:10px">
+        Participants</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div style="width:80%"></div>
+      <div style="text-align:center, width=20%">
+      <span >
+        Date et adresse</span>
+        <img src="../../assets/images/shutdown.png" alt="close" style="width: 40px; height: 40px; cursor:pointer;">
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

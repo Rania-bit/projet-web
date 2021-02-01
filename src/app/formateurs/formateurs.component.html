@@ -1,0 +1,138 @@
+<div class="container">
+  <div style="margin-top: 20px; margin-bottom: 20px;">
+    <img  src="../../assets/images/reload.png" 
+    style="width: 60px; height: 60px;
+    position: left;" (click)="loading();">
+    <img  src="../../assets/images/add.png" 
+    style="width: 60px; height: 60px;
+    margin-left: 10px;
+    position: left;" (click)="showForm= !showForm">
+  </div>
+
+  <!-- FORM -->
+  <div class="card card-body mb-3" *ngIf="showForm">
+    <form #Form="ngForm" (ngSubmit)="onSubmit(Form)">
+      <div class="form-group">
+        <label>Prenom</label>
+        <input 
+          type="text"
+          [(ngModel)]="formateur.firstName" 
+          [ngClass]="{'is-invalid': formateurFirstName.errors && formateurFirstName.touched}" 
+          name="firstName" 
+          class="form-control"
+          #formateurFirstName= "ngModel"
+          required
+          minlength="2"
+        >
+        <div [hidden]="!formateurFirstName.errors?.required" class="invalid-feedback">
+          Champs Obligatoire
+        </div>
+        <div [hidden]="!formateurFirstName.errors?.minlength" class="invalid-feedback">
+          Au minimum 2 caracteres
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Nom</label>
+        <input 
+          type="text"
+          [(ngModel)]="formateur.lastName" 
+          [ngClass]="{'is-invalid': formateurLastName.errors && formateurLastName.touched}" 
+          name="lastName" 
+          class="form-control"
+          #formateurLastName= "ngModel"
+          required
+          minlength="2"
+        >
+        <div [hidden]="!formateurLastName.errors?.required" class="invalid-feedback">
+          Champs Obligatoire
+        </div>
+        <div [hidden]="!formateurLastName.errors?.minlength" class="invalid-feedback">
+          Au minimum 2 caracteres
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Email</label> 
+        <input 
+          type="email"
+          [(ngModel)]="formateur.email" 
+          [ngClass]="{'is-invalid': formateurEmail.errors && formateurEmail.touched}" 
+          name="email" 
+          class="form-control"
+          #formateurEmail= "ngModel"
+          required
+          pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+        >
+        <div [hidden]="!formateurEmail.errors?.required" class="invalid-feedback">
+          Champs Obligatoire
+        </div>
+        <div [hidden]="!formateurEmail.errors?.pattern" class="invalid-feedback">
+          Email invalid
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Addresse</label>
+        <input 
+          type="text"
+          [(ngModel)]="formateur.addresse"   
+          name="addresse" 
+          class="form-control"
+          #formateurAddresse= "ngModel"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Domaine</label>
+        <input 
+          type="text"
+          [(ngModel)]="formateur.domaine"  
+          name="domaine" 
+          [ngClass]="{'is-invalid': formateurDomaine.errors && formateurDomaine.touched}" 
+          class="form-control"
+          #formateurDomaine= "ngModel"
+          required
+        >
+        <div [hidden]="!formateurDomaine.errors?.required" class="invalid-feedback">
+          Champs Obligatoire
+        </div>
+      </div>
+  
+      <button [disabled]="!Form.form.valid" class="btn btn-block mb-3">Ajout Formateur</button>
+    </form>
+  </div>
+
+  <div class="text-center" *ngIf="!loaded">
+    <div class="spinner-border" style="width: 60px; height: 60px; color: rgba(0, 0, 139, 0.82);" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <!-- LIST  -->
+  <ul class="list-unstyled" *ngIf="loaded">
+    <ul class="list-group">
+      <li class="list-group-item text-white font-weight-bold" style="text-align:center;
+      margin-bottom: 10px;
+      background-color: rgba(0, 0, 139, 0.82);">
+      Liste de Formateurs</li>
+    </ul>
+    <li class="card card-body mb-2" *ngFor="let formateur of formateurs">
+        <h3>{{formateur.firstName}} {{formateur.lastName | uppercase}}
+          <small>
+            <img class="img-fluid" src="../../assets/images/delete.png" style="width:40px; height:40px; float:right; margin-left:5px;" (click)="deleteFormateur(formateur)" alt="delete">
+            <img class="img-fluid" src="../../assets/images/edit.png" style="width:40px; height:40px; float: right;" alt="edit" (click)="showForm = !showForm;">
+          </small>
+        </h3>
+        
+        <ul class="list-group">
+          <li class="list-group-item">Email: {{formateur.email}}</li>
+          <li class="list-group-item">Domaine: {{formateur.domaine}}</li>
+          <li class="list-group-item" *ngIf="formateur.addresse">Addresse: {{formateur.addresse}}</li>
+        </ul>
+    </li>
+  </ul>
+  
+
+
+</div>
